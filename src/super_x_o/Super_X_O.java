@@ -7,11 +7,14 @@ package super_x_o;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
@@ -19,7 +22,10 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -35,7 +41,7 @@ import javafx.stage.Stage;
 public class Super_X_O extends Application {
     
        Scene currentScene;
-    
+     
     public void initMainWindow(){        
         BorderPane mainWindowPane = new BorderPane();
         
@@ -130,7 +136,23 @@ public class Super_X_O extends Application {
         mainWindowPaneScrolled.setFitToWidth(true);
         currentScene = new Scene(mainWindowPaneScrolled);        
     }
-
+    
+    public void invitationWindow(){ 
+        Alert invitation = new Alert(Alert.AlertType.CONFIRMATION);
+        invitation.setTitle("Invitation Message");
+        invitation.setHeaderText("*playerx* wants to play with you");
+        invitation.setContentText("do you want to play with him?");
+        ButtonType yes = new ButtonType("Yes");
+        ButtonType no = new ButtonType("No");
+        invitation.getButtonTypes().setAll(yes, no);
+        Optional<ButtonType> result = invitation.showAndWait();
+        if (result.get() == yes){
+            System.out.println("yes");
+        } else {
+            System.out.println("yes");
+        }
+    }
+    
     @Override
     public void init() {
         initMainWindow();
@@ -138,7 +160,9 @@ public class Super_X_O extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+//        invitationWindow();
         primaryStage.setScene(currentScene);
+        primaryStage.setTitle("Super_XO");
         primaryStage.show();
     }
 
