@@ -40,7 +40,7 @@ import javafx.stage.Stage;
  */
 public class Super_X_O extends Application {
     
-       Scene currentScene;
+    Scene currentScene;
      
     public void initMainWindow(){        
         BorderPane mainWindowPane = new BorderPane();
@@ -154,12 +154,8 @@ public class Super_X_O extends Application {
     }
     
     @Override
-    public void init() {
-        initMainWindow();
-    }
-    
-    @Override
     public void start(Stage primaryStage) throws Exception {
+        initMainWindow();
 //        invitationWindow();
         primaryStage.setScene(currentScene);
         primaryStage.setTitle("Super_XO");
