@@ -165,7 +165,8 @@ public class Super_X_O extends Application implements EventHandler<ActionEvent> 
         Button signOut;
         Button quitGame;
         Button newGame;
-        Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
+       // Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
+        Button[] Buttons=new Button[9];
         newGame=new Button("New Game");
         quitGame=new Button("Quit Game");
         signOut=new Button("Sign Out");
@@ -173,62 +174,31 @@ public class Super_X_O extends Application implements EventHandler<ActionEvent> 
         borderPane=new BorderPane();
         gamePane=new GridPane();
         
+        
         btnsPane.getChildren().addAll(newGame,quitGame,signOut);
         btnsPane.setColumnHalignment(HPos.LEFT);
         btnsPane.setAlignment(Pos.CENTER);
         btnsPane.setVgap(50);
         borderPane.setLeft(btnsPane);
         borderPane.setCenter(gamePane);
+         
+        for(int i=0;i<9;i++){
+           Buttons[i] = new Button();
+           Buttons[i].setMinSize(100,100);
+           Buttons[i].setStyle("-fx-background-color:lightblue");
+           Buttons[i].setOnAction(this);
+        }
+       
         
-        b1=new Button();
-        b2=new Button();
-        b3=new Button();
-        b4=new Button();
-        b5=new Button();
-        b6=new Button();
-        b7=new Button();
-        b8=new Button();
-        b9=new Button();
-        
-        b1.setMinSize(100,100);
-        b2.setMinSize(100,100);
-        b3.setMinSize(100,100);
-        b4.setMinSize(100,100);
-        b5.setMinSize(100,100);
-        b6.setMinSize(100,100);
-        b7.setMinSize(100,100);
-        b8.setMinSize(100,100);
-        b9.setMinSize(100,100);
-        
-        b1.setStyle("-fx-background-color:lightblue");
-        b2.setStyle("-fx-background-color:lightblue");
-        b3.setStyle("-fx-background-color:lightblue");
-        b4.setStyle("-fx-background-color:lightblue");
-        b5.setStyle("-fx-background-color:lightblue");
-        b6.setStyle("-fx-background-color:lightblue");
-        b7.setStyle("-fx-background-color:lightblue");
-        b8.setStyle("-fx-background-color:lightblue");
-        b9.setStyle("-fx-background-color:lightblue");
-        b1.setOnAction(this);
-        b2.setOnAction(this);
-        b3.setOnAction(this);
-        b4.setOnAction(this);
-        
-        b5.setOnAction(this);
-        b6.setOnAction(this);
-        b7.setOnAction(this);
-        b8.setOnAction(this);
-        b9.setOnAction(this);
-        
-        gamePane.add(b1,0,0);
-        gamePane.add(b2,1,0);
-        gamePane.add(b3,2,0);
-        gamePane.add(b4,0,1);
-        gamePane.add(b5,1,1);
-        gamePane.add(b6,2,1);
-        gamePane.add(b7,0,2);
-        gamePane.add(b8,1,2);
-        gamePane.add(b9,2,2);
+        gamePane.add(Buttons[0],0,0);
+        gamePane.add(Buttons[1],1,0);
+        gamePane.add(Buttons[2],2,0);
+        gamePane.add(Buttons[3],0,1);
+        gamePane.add(Buttons[4],1,1);
+        gamePane.add(Buttons[5],2,1);
+        gamePane.add(Buttons[6],0,2);
+        gamePane.add(Buttons[7],1,2);
+        gamePane.add(Buttons[8],2,2);
         gamePane.setHgap(5);
         gamePane.setVgap(5);
         gamePane.setAlignment(Pos.CENTER);
