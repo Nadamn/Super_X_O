@@ -6,7 +6,10 @@
 package super_x_o;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Vector;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,8 +39,11 @@ public class Server extends Application {
     Color red = Color.RED;
     Color green = Color.CHARTREUSE;
     Color gray = Color.LIGHTGREY;
-    String users[] =  new String[]{ "Abdelrahman" , "Bahaa" , "David" , "Mostafa" , "Nada"};
-    int status[] = new int[]{ 2 , 1 , 1 , 0 , 2};     // 0 : off      1:on    2:busy 
+    DataBaseManager DBM;
+    //String users[] =  new String[]{ "Abdelrahman" , "Bahaa" , "David" , "Mostafa" , "Nada"};
+    Vector<String> users= new Vector <String>();
+    Vector<Integer> status= new Vector <Integer>();
+    //int status[] = new int[]{ 2 , 1 , 1 , 0 , 2, 0, 0};     // 0 : off      1:on    2:busy 
     
     private Color state(int s){
         switch (s){
@@ -89,22 +95,13 @@ public class Server extends Application {
             title.setFont(Font.font("Arial", FontWeight.BOLD, 14));
             vbox.getChildren().add(title);
 
-            /*
-            Hyperlink options[] = new Hyperlink[] {
-                new Hyperlink("Sales"),
-                new Hyperlink("Marketing"),
-                new Hyperlink("Distribution"),
-                new Hyperlink("Costs"),
-                new Hyperlink("Costsss"),
-                new Hyperlink("Costs")};
-            */
             
             ArrayList<Hyperlink> options = new ArrayList();
-            for (int i=0; i< users.length; i++) {
-                options.add(new Hyperlink(users[i]));
+            for (int i=0; i< users.size(); i++) {
+                options.add(new Hyperlink(users.get(i)));
             }
             
-            for (int i=0; i<users.length; i++) {
+            for (int i=0; i<users.size(); i++) {
                 VBox.setMargin(options.get(i), new Insets(0, 0, 0, 8));
                 vbox.getChildren().add(options.get(i));
             }
@@ -122,48 +119,33 @@ public class Server extends Application {
             vbox.getChildren().add(title);
             
             ArrayList<Circle> options = new ArrayList();
-            for (int i=0; i< users.length; i++) {
-                options.add(new Circle(6,state(status[i])));
+            for (int i=0; i< users.size(); i++) {
+               options.add(new Circle(6,state(status.get(i))));
             }
             
-            for (int i=0; i<users.length; i++) {
+            for (int i=0; i<users.size(); i++) {
                 VBox.setMargin(options.get(i), new Insets(4, 0, 8, 15));
                 vbox.getChildren().add(options.get(i));
             }
 
-            /*
-            Circle options[] = new Circle[] {
-                new Circle(6 , red),
-                new Circle(6 , red),
-                new Circle(6 , red),
-                new Circle(6 , red),
-                new Circle(6 , red),
-                new Circle(6 , red)};
             
-            for (int i=0; i<6; i++) {
-                VBox.setMargin(options[i], new Insets(4, 0, 8, 15));
-                vbox.getChildren().add(options[i]);
-            }
-            */
             
             return vbox;
         }    
     
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws SQLException {
+           DBM=new DataBaseManager();
+           users=DBM.getPlayerNames();
+           
+           for (int i=0;i<users.size();i++)
+           {
+             status.add((new Random()).nextInt(3));
+           
+           }
+
         
-        /*
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        */
         
 
         BorderPane border = new BorderPane();
@@ -188,3 +170,8 @@ public class Server extends Application {
     }
     
 }
+
+
+
+
+
